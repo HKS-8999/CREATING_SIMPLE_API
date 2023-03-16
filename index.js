@@ -13,7 +13,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-//Reference: https://stackabuse.com/building-a-rest-api-with-node-and-express/cd
+//Reference: https://stackabuse.com/building-a-rest-api-with-node-and-express/
 
 var users = [
   { email: "abc@abc.ca", firstName: "ABC", id: "5abf6783" },
