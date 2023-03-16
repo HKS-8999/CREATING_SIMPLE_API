@@ -5,6 +5,14 @@ const port = 3000;
 
 app.use(express.json());
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+});
+
 //Reference: https://stackabuse.com/building-a-rest-api-with-node-and-express/cd
 
 var users = [
@@ -59,6 +67,26 @@ app.post("/add", (req, res) => {
     users.push(newUser);
     res.status(201).json({ message: "User added", success: true });
   }
+});
+
+app.get("/user/:id", (req, res) => {
+  console.log(req.params)
+  const { id } = req.params;
+  const user = users.find((u) => u.id === id);
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "User not found",
+    });
+  }
+  return res.status(200).json({
+    success: true,
+    user: {
+      email: user.email,
+      firstName: user.firstName,
+      id: user.id,
+    },
+  });
 });
 
 app.listen(port, () => console.log(`Tutorial 5 is listening on port ${port}!`));
