@@ -20,6 +20,12 @@ var users = [
   { email: "xyz@xyz.ca", firstName: "XYZ", id: "5abf674563" },
 ];
 
+app.get("/", (req, res) => {
+  res.send(
+    "Harsh Kamlesbhai Shah (B00899573) - Welcome to Tutorial 5"
+  );
+});
+
 app.get("/users", (req, res) => {
   console.log(users);
   res.json({
